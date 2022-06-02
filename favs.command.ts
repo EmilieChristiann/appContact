@@ -8,7 +8,7 @@ export default {
             const favs: Array<Contact> = favQuery.addFavs();
             const contact = contacts[index];
             favs.push(contact);
-            localStorage.setItem('fav', JSON.stringify(favs))
+            localStorage.setItem('fav', JSON.stringify(favs));
         }
         catch (e) {
             throw new TypeError('An error happened during the save of the favorite');

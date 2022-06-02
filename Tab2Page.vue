@@ -16,12 +16,14 @@
         <ion-card-header>
           <ion-card-title>Ma liste des contacts</ion-card-title>
         </ion-card-header>
+      </ion-card>
+      <ion-card>
         <div v-if="contacts.length > 0">
           <div v-for="(contact, index) in contacts" :key="index">
-            Nom {{ contact.name }} {{contact.firstname}}
+            Nom: {{ contact.name }} {{contact.firstname}}
             <ion-button @click="deleteContact(index)">Supprimer</ion-button>
             <ion-button @click="addFavs(index)">Favori</ion-button>
-            <ion-button expand="block" color="primary" shape="round">Plus d'info</ion-button>
+            <ion-button color="secondary">Plus d'info</ion-button>
           </div>
         </div>
         <div v-if="contacts.length === 0">
@@ -39,6 +41,7 @@ import ExploreContainer from '@/components/ExploreContainer.vue';
 import { Contact } from '../domains/contact.interface';
 import contactQuery from '@/query/contact.query';
 import contactCommand from '@/commands/contact.command';
+import favsCommand from '@/commands/favs.command';
 
 export default defineComponent({
   name: 'Tab2Page',
@@ -69,6 +72,10 @@ export default defineComponent({
       getContacts() {
       this.contacts = contactQuery.getContacts();
     },
+      addFavs(index: number) {
+        const contact: Contact = this.contactForm;
+        return favsCommand.addFavs(index);
+      }
   }, 
 });
 </script>
